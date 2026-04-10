@@ -1,0 +1,163 @@
+---
+title: Installation
+sidebar_position: 2
+---
+
+import FolderTree from '@site/src/components/FolderTree';
+
+# Installation
+
+This guide explains how to install and set up the **PLA4Y - NUGS modular platformer toolkit** in Unreal Engine 5.7.
+
+The toolkit is designed to be modular and easy to integrate into both new and existing projects.
+
+---
+
+## Requirements
+
+Before installing, ensure you have the following:
+
+- Unreal Engine 5.7 installed
+- Visual Studio 2022 (optional, for C++ support)
+- A working Unreal project
+- Sufficient disk space for plugin files
+
+---
+
+## Installing the Toolkit
+
+### Manual Installation
+
+1. Open your Unreal project directory  
+2. Create a folder named:
+
+
+Plugins
+
+
+3. Inside the Plugins folder, create:
+
+
+PLA4Y
+
+
+4. Place the plugin files inside:
+
+
+YourProject/Plugins/PLA4Y/
+
+
+5. Ensure the `.uplugin` file is inside the PLA4Y folder
+
+---
+
+### Pre-built Plugin Installation
+
+If you have a packaged version:
+
+1. Download and extract the plugin  
+2. Move the folder into your project’s Plugins directory  
+3. Confirm the structure is correct:
+
+
+YourProject/Plugins/PLA4Y/PLA4Y.uplugin
+
+
+---
+
+## Enabling the Plugin
+
+1. Open your Unreal project  
+2. Navigate to:
+
+
+Edit → Plugins
+
+
+3. Search for:
+
+
+PLA4Y
+
+
+4. Enable the plugin  
+5. Restart Unreal Engine when prompted  
+
+---
+
+## Verifying Installation
+
+To confirm installation:
+
+- The PLA4Y plugin appears in the Plugins window  
+- New Blueprint Components are visible  
+- Systems such as Collectibles and Doors can be added  
+
+---
+
+## Initial Setup
+
+After installation:
+
+- Add required components to your Player Character  
+- Create initial Data Assets for collectibles or abilities  
+- Add UI widgets if required  
+
+Each system can be used independently.
+
+---
+
+## Folder Structure
+
+A correct installation should look like:
+
+<FolderTree
+  root={{
+    name: 'YourProject',
+    type: 'folder',
+    children: [
+      {
+        name: 'Plugins',
+        type: 'folder',
+        children: [
+          {
+            name: 'PLA4Y',
+            type: 'folder',
+            children: [
+              { name: 'Content', type: 'folder' },
+              { name: 'Source', type: 'folder', note: '(optional)' },
+              { name: 'PLA4Y.uplugin', type: 'file' },
+            ],
+          },
+        ],
+      },
+    ],
+  }}
+/>
+---
+
+## Troubleshooting
+
+### Plugin Not Showing
+
+- Check the folder structure  
+- Ensure the `.uplugin` file exists  
+- Restart Unreal Engine  
+
+---
+
+### Compilation Issues
+
+- Open the project in Visual Studio  
+- Build the solution  
+- Restart Unreal Engine  
+
+---
+
+### Missing Features
+
+- Ensure the plugin is enabled  
+- Check all modules are active  
+
+---
+
