@@ -92,4 +92,10 @@ const config: Config = {
   } satisfies Preset.ThemeConfig,
 };
 
-export default config;
+export default {
+  url: 'https://bbwdmu.github.io/PLA4Y', // Your website URL
+  baseUrl: '/',
+  projectName: 'PLA4Y',
+  organizationName: 'bbwdmu',
+  trailingSlash: false,
+};
