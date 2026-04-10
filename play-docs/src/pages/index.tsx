@@ -15,9 +15,9 @@ function HomepageHeader() {
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
       <div className="container">
         <img
-          src="/img/docusaurus.png"
-          alt="PLA4Y mascot"
-          style={{width: '90px', marginBottom: '1rem'}}
+          src="img/PLA4Y.png"
+          alt="PLA4Y Logo"
+          style={{width: '250px', marginBottom: '1rem'}}
         />
 
         <Heading as="h1" className="hero__title">

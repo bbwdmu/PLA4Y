@@ -42,7 +42,7 @@ const config: Config = {
       title: 'PLA4Y',
       logo: {
         alt: 'PLA4Y Logo',
-        src: 'img/logo.svg',
+        src: 'img/favicon.ico',
       },
       items: [
         {
