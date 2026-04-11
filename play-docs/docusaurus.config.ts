@@ -54,7 +54,7 @@ const config: Config = {
       ],
     },
     footer: {
-      style: 'dark',
+      
       copyright: `Copyright © ${new Date().getFullYear()} PLA4Y`,
     },
     prism: {
