@@ -39,8 +39,8 @@ function HomepageHeader() {
             fontSize: '1rem',
             lineHeight: 1.7,
           }}>
-          PLA4Y is built around small reusable systems called NUGS, neat useable
-          game systems, that slot together to form a solid gameplay skeleton.
+          PLA4Y is built around small reusable systems called NUGS (Neat Useable
+          Game Systems) that slot together to form a solid gameplay skeleton.
           The point is simple. Stop rebuilding the same mechanics every time and
           get back to making the fun bit.
         </p>
