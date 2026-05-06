@@ -70,37 +70,16 @@ const config: Config = {
           title: 'PLA4Y',
           items: [
             {
+              label: 'Selector',
+              to: '/nugs',
+            },
+            {
               label: 'Docs',
               to: '/docs/overview',
             },
             {
-              label: 'NUGS Selector',
-              to: '/nugs',
-            },
-            {
               label: 'Support',
               to: '/support',
-            },
-          ],
-        },
-        {
-          title: 'NUGS Systems',
-          items: [
-            {
-              label: 'Collectibles',
-              to: '/docs/NUGS%20-%20Systems/Collectible',
-            },
-            {
-              label: 'Door And Unlock',
-              to: '/docs/NUGS%20-%20Systems/Doors',
-            },
-            {
-              label: 'Health',
-              to: '/docs/NUGS%20-%20Systems/Health',
-            },
-            {
-              label: 'Ability And Power-Up',
-              to: '/docs/NUGS%20-%20Systems/Ability',
             },
           ],
         },
