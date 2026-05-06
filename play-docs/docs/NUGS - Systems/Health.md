@@ -146,23 +146,23 @@ Use these slots when adding screenshots to the documentation site.
 
 ### Health Component On Player
 
-<!-- ![Health component screenshot placeholder](./img/health-component-placeholder.png) -->
+Image slot: health component on player.
 
 ### Take Damage Blueprint
 
-<!-- ![Take damage Blueprint screenshot placeholder](./img/health-take-damage-placeholder.png) -->
+Image slot: take damage Blueprint.
 
 ### Lives Logic Blueprint
 
-<!-- ![Lives logic Blueprint screenshot placeholder](./img/health-lives-placeholder.png) -->
+Image slot: lives logic Blueprint.
 
 ### Health UI Runtime Test
 
-<!-- ![Health UI runtime screenshot placeholder](./img/health-ui-runtime-placeholder.png) -->
+Image slot: health UI runtime test.
 
 ### Physical Material Damage Setup
 
-<!-- ![Physical material damage screenshot placeholder](./img/health-physical-material-placeholder.png) -->
+Image slot: physical material damage setup.
 
 ## Injected Blueprint Code Slots
 
