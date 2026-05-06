@@ -109,19 +109,19 @@ Use these slots when adding screenshots to the documentation site.
 
 ### Collectible Data Asset
 
-<!-- ![Collectible data asset screenshot placeholder](./img/collectible-data-asset-placeholder.png) -->
+Image slot: collectible data asset.
 
 ### Collectible Actor In Level
 
-<!-- ![Collectible actor setup screenshot placeholder](./img/collectible-actor-placeholder.png) -->
+Image slot: collectible actor in level.
 
 ### Wallet Component On Player
 
-<!-- ![Collectible wallet component screenshot placeholder](./img/collectible-wallet-placeholder.png) -->
+Image slot: collectible wallet component on player.
 
 ### Runtime Test
 
-<!-- ![Collectible runtime test screenshot placeholder](./img/collectible-runtime-placeholder.png) -->
+Image slot: collectible runtime test.
 
 ## Injected Blueprint Code Slots
 
