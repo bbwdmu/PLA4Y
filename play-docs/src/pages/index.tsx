@@ -62,6 +62,7 @@ const nugs = [
 function HomepageHeader() {
   return (
     <header className={clsx('hero hero--primary', styles.heroBanner)}>
+      <div className={styles.heroGlow} aria-hidden="true" />
       <div className="container">
         <img
           src="img/PLA4Y.png"
@@ -84,7 +85,7 @@ function HomepageHeader() {
         </p>
 
         <p className={styles.heroIntro}>
-          <span className={styles.dropCap}>P</span>LA4Y is built around <strong>NUGS</strong>, short for <strong>Neat Usable Game Systems</strong>. Each NUG is a small focused gameplay system, such as collectibles, health, doors, UI, power-ups, or mascot logic. Use one, combine several, or expand them into a full platformer toolkit.
+          PLA4Y is built around <strong>NUGS</strong>, short for <strong><span className={styles.acronymLetter}>N</span>eat <span className={styles.acronymLetter}>U</span>sable <span className={styles.acronymLetter}>G</span>ame <span className={styles.acronymLetter}>S</span>ystems</strong>. Each NUG is a small focused gameplay system, such as collectibles, health, doors, UI, power-ups, or mascot logic. Use one, combine several, or expand them into a full platformer toolkit.
         </p>
 
         <div className={styles.buttons}>
