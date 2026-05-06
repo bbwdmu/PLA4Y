@@ -112,23 +112,23 @@ Use these slots when adding screenshots to the documentation site.
 
 ### Door Actor Setup
 
-<!-- ![Door actor setup screenshot placeholder](./img/door-actor-placeholder.png) -->
+Image slot: door actor setup.
 
 ### Door Lock Component Settings
 
-<!-- ![Door lock component screenshot placeholder](./img/door-lock-component-placeholder.png) -->
+Image slot: door lock component settings.
 
 ### Collectible Requirement Setup
 
-<!-- ![Door collectible requirement screenshot placeholder](./img/door-requirement-placeholder.png) -->
+Image slot: door collectible requirement setup.
 
 ### Runtime Locked Feedback
 
-<!-- ![Door locked feedback screenshot placeholder](./img/door-locked-feedback-placeholder.png) -->
+Image slot: door runtime locked feedback.
 
 ### Runtime Open Door Test
 
-<!-- ![Door open test screenshot placeholder](./img/door-open-test-placeholder.png) -->
+Image slot: door runtime open test.
 
 ## Injected Blueprint Code Slots
 
