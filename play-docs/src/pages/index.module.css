@@ -9,10 +9,11 @@
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.55), transparent 24rem),
-    radial-gradient(circle at 18% 14%, rgba(37, 99, 235, 0.24), transparent 24rem),
-    radial-gradient(circle at 84% 22%, rgba(0, 153, 255, 0.2), transparent 24rem),
-    linear-gradient(180deg, #b7e4ff 0%, #97d4ff 45%, #85caff 100%);
+    radial-gradient(circle at 50% 30%, rgba(255, 255, 255, 0.52), transparent 20rem),
+    radial-gradient(circle at 50% 18%, rgba(132, 205, 255, 0.75), transparent 30rem),
+    radial-gradient(circle at 14% 18%, rgba(37, 99, 235, 0.32), transparent 28rem),
+    radial-gradient(circle at 86% 18%, rgba(0, 92, 210, 0.28), transparent 28rem),
+    linear-gradient(180deg, #8fd3ff 0%, #6fbdf1 52%, #55a6e7 100%);
   color: #05070d;
 }
 
@@ -22,9 +23,20 @@
   inset: 0;
   pointer-events: none;
   background:
-    linear-gradient(135deg, rgba(255, 255, 255, 0.22), transparent 36%),
-    radial-gradient(circle at 50% 58%, rgba(255, 255, 255, 0.28), transparent 20rem);
-  opacity: 0.9;
+    radial-gradient(circle at 50% 42%, rgba(255, 255, 255, 0.24), transparent 18rem),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.08), transparent 45%);
+  opacity: 0.78;
+}
+
+.heroBanner::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 0% 0%, rgba(0, 40, 130, 0.1), transparent 26rem),
+    radial-gradient(circle at 100% 0%, rgba(0, 40, 130, 0.12), transparent 26rem),
+    linear-gradient(90deg, rgba(0, 58, 145, 0.16), transparent 18%, transparent 82%, rgba(0, 58, 145, 0.16));
 }
 
 .heroBanner :global(.container) {
@@ -35,23 +47,23 @@
 .heroGlow {
   position: absolute;
   left: 50%;
-  top: 18%;
-  width: min(720px, 92vw);
-  height: min(720px, 92vw);
-  transform: translate(-50%, -22%);
+  top: 24%;
+  width: min(680px, 90vw);
+  height: min(680px, 90vw);
+  transform: translate(-50%, -26%);
   border-radius: 999px;
   pointer-events: none;
   background:
-    radial-gradient(circle, rgba(255, 255, 255, 0.65) 0%, rgba(163, 221, 255, 0.5) 28%, rgba(37, 99, 235, 0.18) 52%, transparent 72%);
-  filter: blur(10px);
-  opacity: 0.9;
+    radial-gradient(circle, rgba(255, 255, 255, 0.58) 0%, rgba(151, 212, 255, 0.48) 30%, rgba(0, 92, 210, 0.16) 56%, transparent 74%);
+  filter: blur(8px);
+  opacity: 0.86;
 }
 
 .heroLogo {
   width: 250px;
   max-width: 58vw;
   margin-bottom: 1rem;
-  filter: drop-shadow(0 20px 32px rgba(0, 55, 120, 0.26));
+  filter: drop-shadow(0 20px 32px rgba(0, 55, 120, 0.3));
 }
 
 .heroTitle {
@@ -103,7 +115,7 @@
 }
 
 .buttons :global(.button) {
-  box-shadow: 0 12px 28px rgba(0, 55, 120, 0.18);
+  box-shadow: 0 12px 28px rgba(0, 55, 120, 0.2);
 }
 
 .nugsSection {
@@ -156,7 +168,7 @@
   font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: var(--ifm-color-primary);
+  color: rgba(0, 72, 150, 0.74);
 }
 
 .nugsGrid {
@@ -260,9 +272,9 @@
   }
 
   .heroGlow {
-    top: 12%;
-    width: 118vw;
-    height: 118vw;
+    top: 16%;
+    width: 112vw;
+    height: 112vw;
   }
 
   .heroLogo {
