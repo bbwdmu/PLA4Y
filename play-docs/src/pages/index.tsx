@@ -80,8 +80,8 @@ function HomepageHeader() {
           <Link className="button button--secondary button--lg" to="/docs/overview">
             Open Docs
           </Link>
-          <Link className="button button--secondary button--lg" to="/nugs">
-            Open NUGS Selector
+          <Link className="button button--secondary button--lg" to="#nugs-selector">
+            View NUGS Selector
           </Link>
         </div>
       </div>
@@ -91,7 +91,7 @@ function HomepageHeader() {
 
 function NugsHomeSelector() {
   return (
-    <section className={styles.nugsSection}>
+    <section id="nugs-selector" className={styles.nugsSection}>
       <div className="container">
         <div className={styles.nugsHeader}>
           <p className={styles.kicker}>NUGS Selector</p>
