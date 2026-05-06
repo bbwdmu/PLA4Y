@@ -1,5 +1,6 @@
 ---
 title: UI
+slug: /UI/UI
 ---
 
 # UI System
