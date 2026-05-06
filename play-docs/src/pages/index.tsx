@@ -84,7 +84,7 @@ function HomepageHeader() {
         </p>
 
         <p className={styles.heroIntro}>
-          PLA4Y is built around small reusable systems called NUGS. Each NUG is a focused gameplay building block that can work alone, connect with other systems, or be expanded into a larger platformer toolkit.
+          PLA4Y is built around NUGS, short for Neat Usable Game Systems. Each NUG is a small focused gameplay system, such as collectibles, health, doors, UI, power-ups, or mascot logic. Use one, combine several, or expand them into a full platformer toolkit.
         </p>
 
         <div className={styles.buttons}>
@@ -105,13 +105,14 @@ function NugsHomeSelector() {
     <section id="nugs-selector" className={styles.nugsSection}>
       <div className="container">
         <div className={styles.nugsHeader}>
-          <p className={styles.kicker}>NUG Selector</p>
           <Heading as="h2">NUGS</Heading>
           <p className={styles.nugsMeaning}>Neat Usable Game Systems</p>
           <p>
-            Pick a NUG to view its setup notes, Blueprint workflow, screenshots, known issues, and implementation details.
+            Each NUG is a reusable gameplay system. Pick one below to view its setup notes, Blueprint workflow, screenshots, known issues, and implementation details.
           </p>
         </div>
+
+        <p className={styles.selectorLabel}>NUG Selector</p>
 
         <div className={styles.nugsGrid}>
           {nugs.map((nug) => (
