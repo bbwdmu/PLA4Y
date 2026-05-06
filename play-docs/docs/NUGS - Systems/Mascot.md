@@ -8,7 +8,7 @@ title: Mascot
 
 The mascot system provides a companion actor that follows the player and reacts to gameplay state.
 
-Use it for a Spyro-style companion, a platformer buddy, a guide character, or a visual feedback helper for health, collectibles, and abilities.
+Use it for a platformer buddy, a guide character, or a visual feedback helper for health, collectibles, and abilities.
 
 ## Components
 
@@ -138,23 +138,23 @@ Use these slots when adding screenshots to the documentation site.
 
 ### Mascot Component On Player
 
-![Mascot component screenshot placeholder](./img/mascot-component-placeholder.png)
+<!-- ![Mascot component screenshot placeholder](./img/mascot-component-placeholder.png) -->
 
 ### Mascot Actor Blueprint
 
-![Mascot actor Blueprint screenshot placeholder](./img/mascot-actor-placeholder.png)
+<!-- ![Mascot actor Blueprint screenshot placeholder](./img/mascot-actor-placeholder.png) -->
 
 ### Follow Logic Blueprint
 
-![Mascot follow logic screenshot placeholder](./img/mascot-follow-placeholder.png)
+<!-- ![Mascot follow logic screenshot placeholder](./img/mascot-follow-placeholder.png) -->
 
 ### Mood Reaction Setup
 
-![Mascot mood setup screenshot placeholder](./img/mascot-mood-placeholder.png)
+<!-- ![Mascot mood setup screenshot placeholder](./img/mascot-mood-placeholder.png) -->
 
 ### Look At Target Test
 
-![Mascot look at test screenshot placeholder](./img/mascot-look-at-placeholder.png)
+<!-- ![Mascot look at test screenshot placeholder](./img/mascot-look-at-placeholder.png) -->
 
 ## Injected Blueprint Code Slots
 
@@ -194,7 +194,7 @@ Paste exported Blueprint node code here.
 
 - Add collectible look-at support using tags later
 - Add a buddy magnet component for collectible guidance
-- Add animation states for idle, alert, hurt, happy, and hidden
+- Add animation states for idle, alert, damaged, happy, and hidden
 - Add material parameter support for colour and mood visuals
 - Keep mascot logic optional so the toolkit works without it
 
@@ -206,5 +206,5 @@ Paste exported Blueprint node code here.
 - Mascot reacts to low, mid, and high health
 - Mascot can clear its look-at target
 - Mascot can look at a collectible test actor
-- System still works if the mascot actor is missing
+- System still works if the mascot actor is not assigned
 - Designers can tune follow distance and speed without editing core logic
