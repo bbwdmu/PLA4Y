@@ -158,23 +158,23 @@ Use these slots when adding screenshots to the documentation site.
 
 ### Ability Component On Player
 
-![Ability component screenshot placeholder](./img/ability-component-placeholder.png)
+<!-- ![Ability component screenshot placeholder](./img/ability-component-placeholder.png) -->
 
 ### Power-Up Pickup Setup
 
-![Power-up pickup screenshot placeholder](./img/powerup-pickup-placeholder.png)
+<!-- ![Power-up pickup screenshot placeholder](./img/powerup-pickup-placeholder.png) -->
 
 ### Activate Ability Blueprint
 
-![Activate ability Blueprint screenshot placeholder](./img/ability-activate-placeholder.png)
+<!-- ![Activate ability Blueprint screenshot placeholder](./img/ability-activate-placeholder.png) -->
 
 ### Duration Timer Blueprint
 
-![Duration timer Blueprint screenshot placeholder](./img/ability-duration-placeholder.png)
+<!-- ![Duration timer Blueprint screenshot placeholder](./img/ability-duration-placeholder.png) -->
 
 ### Ability Door Requirement Test
 
-![Ability door test screenshot placeholder](./img/ability-door-test-placeholder.png)
+<!-- ![Ability door test screenshot placeholder](./img/ability-door-test-placeholder.png) -->
 
 ## Injected Blueprint Code Slots
 
