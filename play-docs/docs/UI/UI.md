@@ -128,23 +128,23 @@ Use these slots when adding screenshots to the documentation site.
 
 ### Health Widget Designer
 
-<!-- ![Health widget designer screenshot placeholder](./img/ui-health-widget-placeholder.png) -->
+Image slot: health widget designer.
 
 ### Collectible Widget Designer
 
-<!-- ![Collectible widget designer screenshot placeholder](./img/ui-collectible-widget-placeholder.png) -->
+Image slot: collectible widget designer.
 
 ### Door Requirement Widget
 
-<!-- ![Door requirement widget screenshot placeholder](./img/ui-door-requirement-placeholder.png) -->
+Image slot: door requirement widget.
 
 ### Interaction Prompt Runtime
 
-<!-- ![Interaction prompt runtime screenshot placeholder](./img/ui-interact-prompt-placeholder.png) -->
+Image slot: interaction prompt runtime.
 
 ### HUD Runtime Test
 
-<!-- ![HUD runtime test screenshot placeholder](./img/ui-hud-runtime-placeholder.png) -->
+Image slot: HUD runtime test.
 
 ## Injected Blueprint Code Slots
 
