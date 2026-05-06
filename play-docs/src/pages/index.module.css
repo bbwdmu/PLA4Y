@@ -4,16 +4,45 @@
  */
 
 .heroBanner {
-  padding: 4rem 0;
+  padding: 4.5rem 0 4rem;
   text-align: center;
   position: relative;
   overflow: hidden;
 }
 
-@media screen and (max-width: 996px) {
-  .heroBanner {
-    padding: 2rem;
-  }
+.heroLogo {
+  width: 250px;
+  max-width: 58vw;
+  margin-bottom: 1rem;
+}
+
+.heroTitle {
+  margin: 0;
+  font-size: clamp(4rem, 12vw, 7rem);
+  font-weight: 950;
+  line-height: 0.9;
+  letter-spacing: -0.06em;
+}
+
+.heroAcronym {
+  margin: 1rem 0 0;
+  font-size: clamp(1.25rem, 3vw, 2rem);
+  font-weight: 900;
+  line-height: 1.25;
+}
+
+.heroSubtitle {
+  margin: 2rem auto 0;
+  max-width: 860px;
+  font-size: clamp(1.35rem, 3vw, 2rem);
+  line-height: 1.35;
+}
+
+.heroIntro {
+  max-width: 800px;
+  margin: 1.5rem auto 1.8rem;
+  font-size: 1.05rem;
+  line-height: 1.75;
 }
 
 .buttons {
@@ -25,14 +54,25 @@
 }
 
 .nugsSection {
-  padding: 4rem 0;
-  background: linear-gradient(180deg, transparent, rgba(37, 99, 235, 0.08));
+  padding: 4.5rem 0;
+  background:
+    radial-gradient(circle at top, rgba(37, 99, 235, 0.16), transparent 34rem),
+    linear-gradient(180deg, transparent, rgba(37, 99, 235, 0.08));
 }
 
 .nugsHeader {
-  max-width: 760px;
-  margin: 0 auto 2rem;
+  max-width: 860px;
+  margin: 0 auto 2.5rem;
   text-align: center;
+}
+
+.nugsHeader h2 {
+  margin: 0;
+  font-size: clamp(4.5rem, 15vw, 9rem);
+  font-weight: 950;
+  line-height: 0.85;
+  letter-spacing: -0.08em;
+  color: var(--ifm-color-primary);
 }
 
 .nugsHeader p {
@@ -40,10 +80,17 @@
   line-height: 1.7;
 }
 
+.nugsMeaning {
+  margin: 1rem 0 0.8rem;
+  font-size: clamp(1.35rem, 4vw, 2.35rem);
+  font-weight: 950;
+  color: var(--ifm-font-color-base) !important;
+}
+
 .kicker {
   margin: 0 0 0.5rem;
   font-size: 0.85rem;
-  font-weight: 800;
+  font-weight: 900;
   letter-spacing: 0.12em;
   text-transform: uppercase;
   color: var(--ifm-color-primary);
@@ -58,13 +105,12 @@
 .nugCard {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  min-height: 270px;
+  min-height: 310px;
   padding: 1.5rem;
-  border: 1px solid var(--ifm-color-emphasis-200);
+  border: 2px solid var(--ifm-color-emphasis-200);
   border-radius: 24px;
   color: inherit;
-  text-align: center;
+  text-align: left;
   text-decoration: none;
   background: var(--ifm-card-background-color);
   box-shadow: 0 16px 40px rgba(0, 0, 0, 0.08);
@@ -74,51 +120,103 @@
 .nugCard:hover {
   color: inherit;
   text-decoration: none;
-  transform: translateY(-4px);
+  transform: translateY(-5px);
   border-color: var(--ifm-color-primary);
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.14);
 }
 
-.logoWrap {
+.cardTopRow {
   display: flex;
   align-items: center;
-  justify-content: center;
-  width: 112px;
-  height: 112px;
-  margin-bottom: 1rem;
-  border-radius: 28px;
-  background: rgba(37, 99, 235, 0.1);
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 1.15rem;
 }
 
-.nugLogo {
-  width: 86px;
-  height: 86px;
-  object-fit: contain;
+.emojiWrap {
+  display: grid;
+  width: 72px;
+  height: 72px;
+  place-items: center;
+  border: 2px solid var(--ifm-color-emphasis-300);
+  border-radius: 20px;
+  background: rgba(37, 99, 235, 0.1);
+  font-size: 2.35rem;
+}
+
+.nugStatus {
+  padding: 0.4rem 0.7rem;
+  border-radius: 999px;
+  background: rgba(37, 99, 235, 0.12);
+  color: var(--ifm-color-primary);
+  font-size: 0.75rem;
+  font-weight: 900;
+  white-space: nowrap;
 }
 
 .nugTitle {
-  margin: 0 0 0.4rem;
-  font-size: 1.2rem;
+  margin: 0 0 0.35rem;
+  font-size: 1.35rem;
+  font-weight: 950;
+}
+
+.nugShortName {
+  margin: 0 0 0.8rem !important;
+  color: var(--ifm-color-primary) !important;
+  font-size: 0.95rem;
+  font-weight: 900;
 }
 
 .nugCard p {
   margin: 0;
   color: var(--ifm-color-emphasis-700);
-  line-height: 1.55;
+  line-height: 1.6;
+}
+
+.cardAction {
+  display: inline-flex;
+  margin-top: auto;
+  padding-top: 1.25rem;
+  color: var(--ifm-color-primary);
+  font-weight: 900;
 }
 
 @media screen and (max-width: 996px) {
+  .heroBanner {
+    padding: 3rem 2rem;
+  }
+
   .nugsGrid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 @media screen and (max-width: 640px) {
+  .heroBanner {
+    padding: 2.5rem 1.25rem;
+  }
+
+  .heroLogo {
+    width: 210px;
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+
+  .buttons a {
+    width: 100%;
+  }
+
   .nugsSection {
     padding: 3rem 0;
   }
 
   .nugsGrid {
     grid-template-columns: 1fr;
+  }
+
+  .nugCard {
+    min-height: auto;
   }
 }
