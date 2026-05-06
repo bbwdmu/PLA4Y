@@ -11,32 +11,50 @@ import styles from './index.module.css';
 const nugs = [
   {
     title: 'Collectibles',
-    description: 'Data-driven pickups, wallet values, and collectible tracking.',
+    shortName: 'Collectible NUG',
+    emoji: '💎',
+    status: 'Core NUG',
+    description: 'Data-driven pickups, wallet values, and collectible tracking for collectathon-style projects.',
     to: '/docs/NUGS%20-%20Systems/Collectible',
   },
   {
     title: 'Door And Unlock',
-    description: 'Reusable unlock logic for doors, gates, jars, rocks, and rewards.',
+    shortName: 'Door NUG',
+    emoji: '🚪',
+    status: 'Gameplay NUG',
+    description: 'Reusable unlock logic for doors, gates, jars, rocks, rewards, and progression checks.',
     to: '/docs/NUGS%20-%20Systems/Doors',
   },
   {
     title: 'Health',
-    description: 'Damage, healing, lives, death checks, and health UI hooks.',
+    shortName: 'Health NUG',
+    emoji: '❤️',
+    status: 'Core NUG',
+    description: 'Damage, healing, lives, death checks, health states, and UI feedback hooks.',
     to: '/docs/NUGS%20-%20Systems/Health',
   },
   {
     title: 'Mascot',
-    description: 'A companion actor that follows the player and reacts to state.',
+    shortName: 'Mascot NUG',
+    emoji: '✨',
+    status: 'Companion NUG',
+    description: 'A companion actor that follows the player, reacts to state, and supports platformer feedback.',
     to: '/docs/NUGS%20-%20Systems/Mascot',
   },
   {
     title: 'Ability And Power-Up',
-    description: 'Temporary power-ups, ability states, and action-based checks.',
+    shortName: 'Power-Up NUG',
+    emoji: '⚡',
+    status: 'In Progress',
+    description: 'Temporary power-ups, ability states, timers, action-based checks, and expandable effects.',
     to: '/docs/NUGS%20-%20Systems/Ability',
   },
   {
     title: 'UI',
-    description: 'HUD widgets, prompts, requirement feedback, and display hooks.',
+    shortName: 'UI NUG',
+    emoji: '🖥️',
+    status: 'Support NUG',
+    description: 'HUD widgets, prompts, requirement feedback, display hooks, and player-facing information.',
     to: '/docs/UI/UI',
   },
 ];
@@ -47,33 +65,26 @@ function HomepageHeader() {
       <div className="container">
         <img
           src="img/PLA4Y.png"
-          alt="PLA4Y Logo"
-          style={{width: '250px', marginBottom: '1rem'}}
+          alt="PLA4Y logo showing a controller breaking into modular blue blocks"
+          className={styles.heroLogo}
         />
 
-        <Heading as="h1" className="hero__title">
+        <p className={styles.kicker}>PLA4Y Documentation</p>
+
+        <Heading as="h1" className={styles.heroTitle}>
           PLA4Y
         </Heading>
 
-        <Heading as="h2" className="hero_title">
-          (Platformer Logic Assembled 4 You)
-        </Heading>
+        <p className={styles.heroAcronym}>
+          Platformer Logic Assembled 4 You
+        </p>
 
-        <p className="hero__subtitle">
+        <p className={styles.heroSubtitle}>
           Modular platformer building blocks for Unreal Engine 5.7.
         </p>
 
-        <p
-          style={{
-            maxWidth: '760px',
-            margin: '0 auto 1.5rem',
-            fontSize: '1rem',
-            lineHeight: 1.7,
-          }}>
-          PLA4Y is built around small reusable systems called NUGS (Neat Useable
-          Game Systems) that slot together to form a solid gameplay skeleton.
-          The point is simple. Stop rebuilding the same mechanics every time and
-          get back to making the fun bit.
+        <p className={styles.heroIntro}>
+          PLA4Y is built around small reusable systems called NUGS. Each NUG is a focused gameplay building block that can work alone, connect with other systems, or be expanded into a larger platformer toolkit.
         </p>
 
         <div className={styles.buttons}>
@@ -81,7 +92,7 @@ function HomepageHeader() {
             Open Docs
           </Link>
           <Link className="button button--secondary button--lg" to="#nugs-selector">
-            View NUGS Selector
+            View NUGS
           </Link>
         </div>
       </div>
@@ -94,21 +105,28 @@ function NugsHomeSelector() {
     <section id="nugs-selector" className={styles.nugsSection}>
       <div className="container">
         <div className={styles.nugsHeader}>
-          <p className={styles.kicker}>NUGS Selector</p>
-          <Heading as="h2">Choose A Gameplay System</Heading>
+          <p className={styles.kicker}>NUG Selector</p>
+          <Heading as="h2">NUGS</Heading>
+          <p className={styles.nugsMeaning}>Neat Usable Game Systems</p>
           <p>
-            Jump straight into the documentation for each reusable PLA4Y system.
+            Pick a NUG to view its setup notes, Blueprint workflow, screenshots, known issues, and implementation details.
           </p>
         </div>
 
         <div className={styles.nugsGrid}>
           {nugs.map((nug) => (
             <Link className={styles.nugCard} to={nug.to} key={nug.title}>
-              <div className={styles.logoWrap}>
-                <img src="img/PLA4Y.png" alt="NUGS logo" className={styles.nugLogo} />
+              <div className={styles.cardTopRow}>
+                <div className={styles.emojiWrap} aria-hidden="true">
+                  {nug.emoji}
+                </div>
+                <span className={styles.nugStatus}>{nug.status}</span>
               </div>
+
               <Heading as="h3" className={styles.nugTitle}>{nug.title}</Heading>
+              <p className={styles.nugShortName}>{nug.shortName}</p>
               <p>{nug.description}</p>
+              <span className={styles.cardAction}>Open NUG docs</span>
             </Link>
           ))}
         </div>
@@ -123,7 +141,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={siteConfig.title}
-      description="PLA4Y modular platformer toolkit documentation">
+      description="PLA4Y NUGS documentation for modular Unreal Engine platformer systems, including collectibles, doors, health, abilities, UI, and mascot companion systems.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
