@@ -9,18 +9,49 @@
   position: relative;
   overflow: hidden;
   background:
-    radial-gradient(circle at 50% 8%, rgba(255, 255, 255, 0.38), transparent 24rem),
-    radial-gradient(circle at 20% 18%, rgba(37, 99, 235, 0.14), transparent 22rem),
-    radial-gradient(circle at 80% 15%, rgba(37, 99, 235, 0.12), transparent 20rem),
-    linear-gradient(180deg, #a9dcff 0%, #97d4ff 45%, #8bceff 100%);
+    radial-gradient(circle at 50% 18%, rgba(255, 255, 255, 0.55), transparent 24rem),
+    radial-gradient(circle at 18% 14%, rgba(37, 99, 235, 0.24), transparent 24rem),
+    radial-gradient(circle at 84% 22%, rgba(0, 153, 255, 0.2), transparent 24rem),
+    linear-gradient(180deg, #b7e4ff 0%, #97d4ff 45%, #85caff 100%);
   color: #05070d;
+}
+
+.heroBanner::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(135deg, rgba(255, 255, 255, 0.22), transparent 36%),
+    radial-gradient(circle at 50% 58%, rgba(255, 255, 255, 0.28), transparent 20rem);
+  opacity: 0.9;
+}
+
+.heroBanner :global(.container) {
+  position: relative;
+  z-index: 2;
+}
+
+.heroGlow {
+  position: absolute;
+  left: 50%;
+  top: 18%;
+  width: min(720px, 92vw);
+  height: min(720px, 92vw);
+  transform: translate(-50%, -22%);
+  border-radius: 999px;
+  pointer-events: none;
+  background:
+    radial-gradient(circle, rgba(255, 255, 255, 0.65) 0%, rgba(163, 221, 255, 0.5) 28%, rgba(37, 99, 235, 0.18) 52%, transparent 72%);
+  filter: blur(10px);
+  opacity: 0.9;
 }
 
 .heroLogo {
   width: 250px;
   max-width: 58vw;
   margin-bottom: 1rem;
-  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.16));
+  filter: drop-shadow(0 20px 32px rgba(0, 55, 120, 0.26));
 }
 
 .heroTitle {
@@ -57,11 +88,9 @@
   color: #000000;
 }
 
-.dropCap {
-  display: inline-block;
-  font-size: 1.55em;
+.acronymLetter {
+  font-size: 1.2em;
   font-weight: 950;
-  line-height: 0.9;
   color: #000000;
 }
 
@@ -74,7 +103,7 @@
 }
 
 .buttons :global(.button) {
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 12px 28px rgba(0, 55, 120, 0.18);
 }
 
 .nugsSection {
@@ -228,6 +257,12 @@
 @media screen and (max-width: 640px) {
   .heroBanner {
     padding: 2.5rem 1.25rem;
+  }
+
+  .heroGlow {
+    top: 12%;
+    width: 118vw;
+    height: 118vw;
   }
 
   .heroLogo {
