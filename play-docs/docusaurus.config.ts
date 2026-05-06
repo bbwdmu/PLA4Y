@@ -51,17 +51,67 @@ const config: Config = {
           position: 'left',
           label: 'Docs',
         },
+        {
+          to: '/nugs',
+          position: 'left',
+          label: 'NUGS',
+        },
+        {
+          to: '/support',
+          position: 'right',
+          label: 'Support',
+        },
       ],
     },
     footer: {
-      
+      style: 'dark',
+      links: [
+        {
+          title: 'PLA4Y',
+          items: [
+            {
+              label: 'Docs',
+              to: '/docs/overview',
+            },
+            {
+              label: 'NUGS Selector',
+              to: '/nugs',
+            },
+            {
+              label: 'Support',
+              to: '/support',
+            },
+          ],
+        },
+        {
+          title: 'NUGS Systems',
+          items: [
+            {
+              label: 'Collectibles',
+              to: '/docs/NUGS%20-%20Systems/Collectible',
+            },
+            {
+              label: 'Door And Unlock',
+              to: '/docs/NUGS%20-%20Systems/Doors',
+            },
+            {
+              label: 'Health',
+              to: '/docs/NUGS%20-%20Systems/Health',
+            },
+            {
+              label: 'Ability And Power-Up',
+              to: '/docs/NUGS%20-%20Systems/Ability',
+            },
+          ],
+        },
+      ],
       copyright: `Copyright © ${new Date().getFullYear()} PLA4Y`,
     },
     prism: {
       theme: prismThemes.github,
       darkTheme: prismThemes.dracula,
     },
-  },
+  } satisfies Preset.ThemeConfig,
 };
 
 export default config;
