@@ -138,23 +138,23 @@ Use these slots when adding screenshots to the documentation site.
 
 ### Mascot Component On Player
 
-<!-- ![Mascot component screenshot placeholder](./img/mascot-component-placeholder.png) -->
+Image slot: mascot component on player.
 
 ### Mascot Actor Blueprint
 
-<!-- ![Mascot actor Blueprint screenshot placeholder](./img/mascot-actor-placeholder.png) -->
+Image slot: mascot actor Blueprint.
 
 ### Follow Logic Blueprint
 
-<!-- ![Mascot follow logic screenshot placeholder](./img/mascot-follow-placeholder.png) -->
+Image slot: mascot follow logic Blueprint.
 
 ### Mood Reaction Setup
 
-<!-- ![Mascot mood setup screenshot placeholder](./img/mascot-mood-placeholder.png) -->
+Image slot: mascot mood reaction setup.
 
 ### Look At Target Test
 
-<!-- ![Mascot look at test screenshot placeholder](./img/mascot-look-at-placeholder.png) -->
+Image slot: mascot look at target test.
 
 ## Injected Blueprint Code Slots
 
