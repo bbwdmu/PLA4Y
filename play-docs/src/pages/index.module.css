@@ -8,12 +8,19 @@
   text-align: center;
   position: relative;
   overflow: hidden;
+  background:
+    radial-gradient(circle at 50% 8%, rgba(255, 255, 255, 0.38), transparent 24rem),
+    radial-gradient(circle at 20% 18%, rgba(37, 99, 235, 0.14), transparent 22rem),
+    radial-gradient(circle at 80% 15%, rgba(37, 99, 235, 0.12), transparent 20rem),
+    linear-gradient(180deg, #a9dcff 0%, #97d4ff 45%, #8bceff 100%);
+  color: #05070d;
 }
 
 .heroLogo {
   width: 250px;
   max-width: 58vw;
   margin-bottom: 1rem;
+  filter: drop-shadow(0 18px 28px rgba(0, 0, 0, 0.16));
 }
 
 .heroTitle {
@@ -42,7 +49,20 @@
   max-width: 820px;
   margin: 1.5rem auto 1.8rem;
   font-size: 1.08rem;
-  line-height: 1.75;
+  line-height: 1.85;
+}
+
+.heroIntro strong {
+  font-weight: 950;
+  color: #000000;
+}
+
+.dropCap {
+  display: inline-block;
+  font-size: 1.55em;
+  font-weight: 950;
+  line-height: 0.9;
+  color: #000000;
 }
 
 .buttons {
@@ -51,6 +71,10 @@
   justify-content: center;
   gap: 1rem;
   flex-wrap: wrap;
+}
+
+.buttons :global(.button) {
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.12);
 }
 
 .nugsSection {
