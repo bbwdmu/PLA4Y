@@ -1,12 +1,13 @@
 ---
-title: Ability
+title: Ability And Power-Up NUG
+description: Documentation for the PLA4Y Ability And Power-Up NUG, a modular Unreal Engine system for temporary power-ups, ability states, timers, and expandable gameplay effects.
 ---
 
-# Ability And Power-Up System
+# Ability And Power-Up NUG
 
 ## Overview
 
-The ability and power-up system manages temporary player states, unlockable abilities, and gameplay flags.
+The Ability And Power-Up NUG manages temporary player states, unlockable abilities, and gameplay flags.
 
 Use it for growth, shrinking, speed boosts, swim unlocks, charge states, temporary buffs, or other platformer-style powers.
 
@@ -22,6 +23,21 @@ Use it for growth, shrinking, speed boosts, swim unlocks, charge states, tempora
 - Lets doors and other systems check ability state
 - Gives designers a place to add modular power-up behaviour
 - Keeps each power-up expandable without rebuilding the whole system
+
+## Quick Setup
+
+Use this section to test one temporary power-up.
+
+1. Add `AC_AbilityComponent` to the player character.
+2. Create or confirm the ability type enum exists.
+3. Create a power-up pickup actor.
+4. Set the ability type.
+5. Set the duration.
+6. On overlap, call `ActivateAbility`.
+7. Press Play.
+8. Collect the power-up.
+9. Check that the ability state becomes active.
+10. Wait for the timer to end and check that the state turns off.
 
 ## Features
 
@@ -209,6 +225,42 @@ Paste exported Blueprint node code here.
 ```text title="Door Ability Requirement Nodes"
 Paste exported Blueprint node code here.
 ```
+
+## Common Issues
+
+### Power-Up Does Not Activate
+
+Check that the pickup overlap is firing.
+
+Then check that the player has `AC_AbilityComponent`.
+
+### Ability Turns Off Instantly
+
+Check the duration value.
+
+If the duration is zero or less, the system may treat it as permanent or invalid depending on your logic.
+
+### Ability Never Turns Off
+
+Check that the duration timer is being started.
+
+Also check that `DeactivateAbility` is called when the timer finishes.
+
+### Door Does Not Detect The Power-Up
+
+Check that the door is checking the same ability type that the pickup activates.
+
+Also check that the ability is active at the moment the door checks requirements.
+
+### UI Does Not Show The Active Power-Up
+
+Check that the ability state changes before debugging the UI widget.
+
+### Multiple Power-Ups Break Each Other
+
+Check whether each ability has its own state and timer.
+
+Avoid using one shared timer if several ability types can run independently.
 
 ## Extension Notes
 
