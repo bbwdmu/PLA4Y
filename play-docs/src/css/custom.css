@@ -30,3 +30,41 @@
 
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
+
+.footer {
+  border-top: 1px solid rgba(143, 211, 255, 0.16);
+  background:
+    radial-gradient(circle at 50% 0%, rgba(37, 99, 235, 0.16), transparent 24rem),
+    linear-gradient(180deg, #121b2d 0%, #0e1524 100%);
+}
+
+.footer__logo {
+  margin-bottom: 1rem;
+  filter: drop-shadow(0 10px 20px rgba(0, 153, 255, 0.2));
+}
+
+.footer__title {
+  color: #8fd3ff;
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.footer__item {
+  margin-top: 0.35rem;
+}
+
+.footer__link-item {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+.footer__link-item:hover {
+  color: #8fd3ff;
+  text-decoration: none;
+}
+
+.footer__copyright {
+  margin-top: 1.8rem;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 0.85rem;
+}
