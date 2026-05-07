@@ -48,6 +48,11 @@ function loadKleeScript(): Promise<void> {
 
   if (existingScript) {
     return new Promise((resolve, reject) => {
+      if (window.Klee) {
+        resolve();
+        return;
+      }
+
       existingScript.addEventListener('load', () => resolve(), {once: true});
       existingScript.addEventListener('error', () => reject(new Error('Klee failed to load.')), {once: true});
     });
@@ -80,7 +85,13 @@ export default function BlueprintFlow({title, height = 420, children}: Blueprint
       }
 
       try {
+        setError(null);
+
+        // Klee reads the initial Blueprint source from canvas.innerHTML during init.
+        // React does not preserve children inside a canvas, so the source is injected here first.
+        canvas.innerHTML = blueprintText;
         canvas.textContent = blueprintText;
+
         await loadKleeScript();
 
         if (cancelled || !window.Klee) {
@@ -88,11 +99,17 @@ export default function BlueprintFlow({title, height = 420, children}: Blueprint
         }
 
         const existingInstance = window.Klee.get?.(canvas);
-        const instance = existingInstance ?? window.Klee.init?.(canvas);
-        instance?.display?.(blueprintText);
+
+        if (existingInstance) {
+          existingInstance.display?.(blueprintText);
+          return;
+        }
+
+        window.Klee.init?.(canvas);
       } catch (err) {
         if (!cancelled) {
-          setError('Klee could not render this Blueprint flow. Check the copied Blueprint text and try again.');
+          const message = err instanceof Error ? err.message : 'Unknown Klee error.';
+          setError(`Klee could not render this Blueprint flow. ${message}`);
         }
       }
     }
