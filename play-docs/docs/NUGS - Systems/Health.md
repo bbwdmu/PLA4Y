@@ -1,12 +1,13 @@
 ---
-title: Health
+title: Health NUG
+description: Documentation for the PLA4Y Health NUG, a modular Unreal Engine system for damage, healing, lives, death states, and health feedback.
 ---
 
-# Health System
+# Health NUG
 
 ## Overview
 
-The health system handles damage, healing, death, and lives for actors that need health logic.
+The Health NUG handles damage, healing, death, and lives for actors that need health logic.
 
 Use it for the player, enemies, hazards, destructible props, bosses, and test actors in the demo level.
 
@@ -23,6 +24,19 @@ Use it for the player, enemies, hazards, destructible props, bosses, and test ac
 - Resets health after a life is lost
 - Broadcasts health changes for UI and mascot reactions
 - Supports future damage type logic through physical materials
+
+## Quick Setup
+
+Use this section to test health, damage, healing, and lives.
+
+1. Add `AC_Health` to the player character or test actor.
+2. Set max health.
+3. Set current health to max health on BeginPlay.
+4. Enable lives if the actor should respawn after health reaches zero.
+5. Create a test hazard actor.
+6. On overlap, call `TakeDamage`.
+7. Press Play.
+8. Walk into the hazard and check that health changes.
 
 ## Features
 
@@ -197,6 +211,44 @@ Paste exported Blueprint node code here.
 ```text title="Physical Material Damage Nodes"
 Paste exported Blueprint node code here.
 ```
+
+## Common Issues
+
+### Health Does Not Change
+
+Check that the damage or heal function is being called.
+
+Use a print string before and after `TakeDamage` or `Heal`.
+
+### Health Goes Below Zero
+
+Check that current health is clamped between zero and max health.
+
+### Healing Goes Above Max Health
+
+Check that the heal function also clamps current health.
+
+### Lives Do Not Decrease
+
+Check that lives are enabled.
+
+Also check that the lives check runs when current health reaches zero.
+
+### Health Does Not Reset After Life Loss
+
+Check the `ResetHealthOnLifeLost` bool.
+
+If it is false, the actor may lose a life but keep zero health.
+
+### UI Does Not Update
+
+Check that the health changed dispatcher is firing before debugging the widget.
+
+### Mascot Does Not React To Health
+
+Check that the mascot system is bound to the health changed event.
+
+Also check that the health state enum or percentage is being passed correctly.
 
 ## Extension Notes
 
