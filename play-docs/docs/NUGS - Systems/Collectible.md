@@ -1,12 +1,13 @@
 ---
-title: Collectibles
+title: Collectible NUG
+description: Documentation for the PLA4Y Collectible NUG, a modular Unreal Engine system for data-driven pickups, wallet values, and collectathon-style tracking.
 ---
 
-# Collectible System
+# Collectible NUG
 
 ## Overview
 
-The collectible system provides a data-driven way to define, place, collect, and track pickup items.
+The Collectible NUG provides a data-driven way to define, place, collect, and track pickup items.
 
 Use it for coins, gems, keys, tokens, quest items, or any item that needs to increase a stored amount when collected.
 
@@ -25,15 +26,18 @@ Use it for coins, gems, keys, tokens, quest items, or any item that needs to inc
 - Supports variable collectible values
 - Can connect to doors, UI, save data, quests, and mascot reactions later
 
-## Setup
+## Quick Setup
+
+Use this section to create one working collectible pickup.
 
 1. Add `AC_CollectibleWallet` to the player character.
 2. Create a `PDA_CollectibleDefinition`.
 3. Set the collectible name, icon, tag, value, and display colour.
 4. Place `BP_BaseCollectible` in the level.
-5. Assign the collectible data asset.
-6. Press Play and overlap the collectible.
-7. Check that the wallet amount updates.
+5. Assign the collectible data asset to the placed collectible.
+6. Press Play.
+7. Overlap the collectible.
+8. Check that the wallet value updates.
 
 ## Runtime Flow
 
@@ -144,6 +148,36 @@ Paste exported Blueprint node code here.
 ```text title="Collectible UI Update Nodes"
 Paste exported Blueprint node code here.
 ```
+
+## Common Issues
+
+### Collectible Does Not Pick Up
+
+Check that the collectible collision is set to overlap the player.
+
+Also check that overlap events are enabled.
+
+### Wallet Does Not Update
+
+Check that `AC_CollectibleWallet` is added to the player character.
+
+If the collectible cannot find the wallet, the pickup may work visually but not store a value.
+
+### Wrong Collectible Value Is Added
+
+Check the value inside `PDA_CollectibleDefinition`.
+
+Also check whether the placed collectible has an amount override.
+
+### UI Does Not Update
+
+Check the wallet value first.
+
+Do not debug the UI until you know the collectible amount is changing correctly.
+
+### Door Cannot Read The Collectible Amount
+
+Check that the door requirement uses the same collectible data asset or tag as the collectible wallet.
 
 ## Extension Notes
 
