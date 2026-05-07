@@ -1,5 +1,4 @@
 import type {ReactNode} from 'react';
-import clsx from 'clsx';
 import Heading from '@theme/Heading';
 import styles from './styles.module.css';
 
@@ -11,13 +10,11 @@ type FeatureItem = {
 
 const FeatureList: FeatureItem[] = [
   {
-    title: 'Simple NUGS ',
+    title: 'Simple NUGS',
     icon: '🧩',
     description: (
       <>
-        PLA4Y is built from small interchangeable blocks called NUGS (Neat Useable Game Systems). Need collectibles but
-        not doors yet. Fine. Need health without mascot logic. Also fine. No
-        tangled nonsense required.
+        PLA4Y is built from small interchangeable blocks called NUGS, which means Neat Usable Game Systems. Use the systems you need, ignore the ones you do not, and keep your project clean.
       </>
     ),
   },
@@ -26,9 +23,7 @@ const FeatureList: FeatureItem[] = [
     icon: '🦴',
     description: (
       <>
-        These systems are meant to connect cleanly and form a gameplay skeleton
-        fast. Doors can read collectibles, UI can read health, and you are not
-        left duct taping ten random Blueprints together at 2am.
+        NUGS are designed to connect into a gameplay skeleton. Doors can read collectibles, UI can read health, and systems can talk without duct taping ten random Blueprints together.
       </>
     ),
   },
@@ -37,9 +32,7 @@ const FeatureList: FeatureItem[] = [
     icon: '🚀',
     description: (
       <>
-        The goal is to stop mechanics from holding you hostage. PLA4Y handles
-        the boring repeat work so you can spend more time on polish, style, and
-        making your game actually feel like your game.
+        PLA4Y handles repeat setup work so you can spend more time on polish, style, level ideas, and making the game feel like your own.
       </>
     ),
   },
@@ -47,18 +40,16 @@ const FeatureList: FeatureItem[] = [
 
 function Feature({title, icon, description}: FeatureItem) {
   return (
-    <div className={clsx('col col--4')}>
-      <div className={styles.featureCard}>
-        <div className={styles.iconWrap} aria-hidden="true">
-          <span className={styles.icon}>{icon}</span>
-        </div>
-
-        <div className="text--center padding-horiz--md">
-          <Heading as="h3">{title}</Heading>
-          <p>{description}</p>
-        </div>
+    <article className={styles.featureCard}>
+      <div className={styles.iconWrap} aria-hidden="true">
+        <span className={styles.icon}>{icon}</span>
       </div>
-    </div>
+
+      <div className={styles.featureText}>
+        <Heading as="h3">{title}</Heading>
+        <p>{description}</p>
+      </div>
+    </article>
   );
 }
 
@@ -70,12 +61,12 @@ export default function HomepageFeatures(): ReactNode {
           <Heading as="h2">Why PLA4Y exists</Heading>
           <p>
             Rebuilding the same core mechanics over and over is a waste of time.
-            PLA4Y gives developers a cleaner starting point, with modular NUGs
+            PLA4Y gives developers a cleaner starting point, with modular NUGS
             that can be swapped, expanded, or ignored depending on the project.
           </p>
         </div>
 
-        <div className="row">
+        <div className={styles.featureList}>
           {FeatureList.map((props, idx) => (
             <Feature key={idx} {...props} />
           ))}
