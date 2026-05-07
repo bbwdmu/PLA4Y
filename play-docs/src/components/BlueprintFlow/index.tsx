@@ -35,6 +35,33 @@ function blueprintTextFromChildren(children: React.ReactNode): string {
   return String(children);
 }
 
+function normalizeUnrealObjectPath(value: string): string {
+  return value
+    .replace(/"\/Script\/CoreUObject\.Class'([^']+)'"/g, 'Class\'"$1"\'')
+    .replace(/"\/Script\/CoreUObject\.ScriptStruct'([^']+)'"/g, 'ScriptStruct\'"$1"\'')
+    .replace(/"\/Script\/Engine\.BlueprintGeneratedClass'([^']+)'"/g, 'BlueprintGeneratedClass\'"$1"\'')
+    .replace(/"\/Script\/UMG\.WidgetBlueprintGeneratedClass'([^']+)'"/g, 'WidgetBlueprintGeneratedClass\'"$1"\'')
+    .replace(/"\/Script\/Engine\.UserDefinedEnum'([^']+)'"/g, 'Enum\'"$1"\'');
+}
+
+function patchObjectPinsWithoutClass(text: string): string {
+  return text.replace(
+    /PinType\.PinCategory="object"([\s\S]*?)PinType\.PinSubCategoryObject=None/g,
+    'PinType.PinCategory="object"$1PinType.PinSubCategoryObject=Class\'"/Script/CoreUObject.Object"\'',
+  );
+}
+
+function patchClassPinsWithoutClass(text: string): string {
+  return text.replace(
+    /PinType\.PinCategory="class"([\s\S]*?)PinType\.PinSubCategoryObject=None/g,
+    'PinType.PinCategory="class"$1PinType.PinSubCategoryObject=Class\'"/Script/CoreUObject.Object"\'',
+  );
+}
+
+function normaliseBlueprintForKlee(text: string): string {
+  return patchClassPinsWithoutClass(patchObjectPinsWithoutClass(normalizeUnrealObjectPath(text)));
+}
+
 function loadKleeScript(): Promise<void> {
   if (typeof window === 'undefined') {
     return Promise.resolve();
@@ -73,6 +100,7 @@ export default function BlueprintFlow({title, height = 420, children}: Blueprint
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [error, setError] = useState<string | null>(null);
   const blueprintText = blueprintTextFromChildren(children).trim();
+  const normalisedBlueprintText = normaliseBlueprintForKlee(blueprintText);
 
   useEffect(() => {
     let cancelled = false;
@@ -80,17 +108,15 @@ export default function BlueprintFlow({title, height = 420, children}: Blueprint
     async function renderBlueprint() {
       const canvas = canvasRef.current;
 
-      if (!canvas || !blueprintText) {
+      if (!canvas || !normalisedBlueprintText) {
         return;
       }
 
       try {
         setError(null);
 
-        // Klee reads the initial Blueprint source from canvas.innerHTML during init.
-        // React does not preserve children inside a canvas, so the source is injected here first.
-        canvas.innerHTML = blueprintText;
-        canvas.textContent = blueprintText;
+        canvas.innerHTML = normalisedBlueprintText;
+        canvas.textContent = normalisedBlueprintText;
 
         await loadKleeScript();
 
@@ -101,7 +127,7 @@ export default function BlueprintFlow({title, height = 420, children}: Blueprint
         const existingInstance = window.Klee.get?.(canvas);
 
         if (existingInstance) {
-          existingInstance.display?.(blueprintText);
+          existingInstance.display?.(normalisedBlueprintText);
           return;
         }
 
@@ -119,7 +145,7 @@ export default function BlueprintFlow({title, height = 420, children}: Blueprint
     return () => {
       cancelled = true;
     };
-  }, [blueprintText]);
+  }, [normalisedBlueprintText]);
 
   return (
     <section className={styles.wrapper}>
