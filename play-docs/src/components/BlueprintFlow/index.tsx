@@ -69,9 +69,17 @@ function loadKleeScript(): Promise<void> {
   });
 }
 
-export default function BlueprintFlow({title, height = 420, children}: BlueprintFlowProps): JSX.Element {
+function waitForCanvasPaint(): Promise<void> {
+  return new Promise((resolve) => {
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(() => resolve());
+    });
+  });
+}
+
+export default function BlueprintFlow({title, height = 620, children}: BlueprintFlowProps): JSX.Element {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
-  const [error, setError] = useState<string | null>(null);
+  const [message, setMessage] = useState<string>('Preparing Blueprint flow...');
   const blueprintText = blueprintTextFromChildren(children).trim();
 
   useEffect(() => {
@@ -81,17 +89,17 @@ export default function BlueprintFlow({title, height = 420, children}: Blueprint
       const canvas = canvasRef.current;
 
       if (!canvas || !blueprintText) {
+        setMessage('No Blueprint source found.');
         return;
       }
 
       try {
-        setError(null);
+        setMessage('Rendering Blueprint flow...');
 
-        // Keep the copied Unreal Blueprint export untouched.
-        // Klee reads the initial Blueprint source from canvas.innerHTML during init.
         canvas.innerHTML = blueprintText;
         canvas.textContent = blueprintText;
 
+        await waitForCanvasPaint();
         await loadKleeScript();
 
         if (cancelled || !window.Klee) {
@@ -99,17 +107,18 @@ export default function BlueprintFlow({title, height = 420, children}: Blueprint
         }
 
         const existingInstance = window.Klee.get?.(canvas);
+        const instance = existingInstance ?? window.Klee.init?.(canvas);
 
-        if (existingInstance) {
-          existingInstance.display?.(blueprintText);
-          return;
+        await waitForCanvasPaint();
+        instance?.display?.(blueprintText);
+
+        if (!cancelled) {
+          setMessage('Blueprint flow rendered automatically.');
         }
-
-        window.Klee.init?.(canvas);
       } catch (err) {
         if (!cancelled) {
-          const message = err instanceof Error ? err.message : 'Unknown Klee error.';
-          setError(`Klee could not render this Blueprint flow. ${message}`);
+          const errorMessage = err instanceof Error ? err.message : 'Unknown error.';
+          setMessage(`Klee render failed: ${errorMessage}`);
         }
       }
     }
@@ -124,10 +133,10 @@ export default function BlueprintFlow({title, height = 420, children}: Blueprint
   return (
     <section className={styles.wrapper}>
       {title ? <div className={styles.title}>{title}</div> : null}
+      <p className={styles.status}>{message}</p>
       <div className={styles.canvasFrame}>
         <canvas ref={canvasRef} className="klee" height={height} data-klee-paste="true" />
       </div>
-      {error ? <p className={styles.error}>{error}</p> : null}
       <details className={styles.sourceDetails}>
         <summary>Show copied Blueprint source</summary>
         <pre>{blueprintText}</pre>
