@@ -30,6 +30,11 @@ const config: Config = {
         docs: {
           sidebarPath: './sidebars.ts',
         },
+        sitemap: {
+          changefreq: 'weekly',
+          priority: 0.7,
+          ignorePatterns: ['/tags/**'],
+        },
         theme: {
           customCss: './src/css/custom.css',
         },
@@ -43,6 +48,30 @@ const config: Config = {
       disableSwitch: true,
       respectPrefersColorScheme: false,
     },
+    metadata: [
+      {
+        name: 'description',
+        content:
+          'PLA4Y NUGS documentation for a modular Unreal Engine 5.7 platformer toolkit with reusable gameplay systems for collectibles, doors, health, power-ups, UI, and mascot companions.',
+      },
+      {
+        name: 'keywords',
+        content:
+          'PLA4Y, NUGS, Unreal Engine 5.7, Unreal Engine toolkit, platformer toolkit, game development documentation, Blueprint systems, collectibles system, health component, power-up system, door unlock system, mascot companion system, Docusaurus',
+      },
+      {
+        property: 'og:type',
+        content: 'website',
+      },
+      {
+        property: 'og:site_name',
+        content: 'PLA4Y Documentation',
+      },
+      {
+        name: 'twitter:card',
+        content: 'summary',
+      },
+    ],
     navbar: {
       title: 'PLA4Y',
       logo: {
