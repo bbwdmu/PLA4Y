@@ -1,12 +1,13 @@
 ---
-title: Mascot
+title: Mascot NUG
+description: Documentation for the PLA4Y Mascot NUG, a modular Unreal Engine companion system for follow behaviour, mood reactions, look-at targets, and player feedback.
 ---
 
-# Mascot System
+# Mascot NUG
 
 ## Overview
 
-The mascot system provides a companion actor that follows the player and reacts to gameplay state.
+The Mascot NUG provides a companion actor that follows the player and reacts to gameplay state.
 
 Use it for a platformer buddy, a guide character, or a visual feedback helper for health, collectibles, and abilities.
 
@@ -23,6 +24,19 @@ Use it for a platformer buddy, a guide character, or a visual feedback helper fo
 - Lets the mascot react to abilities or power-ups
 - Can point or look at important world objects
 - Can support collectible search behaviour later
+
+## Quick Setup
+
+Use this section to test a simple mascot companion.
+
+1. Add `AC_MascotFollower` to the player character.
+2. Assign `BP_MascotFollowerActor` as the mascot actor class.
+3. Set the follow offset.
+4. Press Play.
+5. Check that the mascot spawns or assigns correctly.
+6. Move the player and check that the mascot follows.
+7. Damage the player.
+8. Check that the mascot mood updates.
 
 ## Features
 
@@ -189,6 +203,42 @@ Paste exported Blueprint node code here.
 ```text title="Health To Mascot Binding Nodes"
 Paste exported Blueprint node code here.
 ```
+
+## Common Issues
+
+### Mascot Does Not Spawn
+
+Check that the mascot actor class is assigned in `AC_MascotFollower`.
+
+Also check that spawn logic runs on BeginPlay.
+
+### Mascot Does Not Follow The Player
+
+Check that the player reference is valid.
+
+Also check that the follow update logic is running.
+
+### Mascot Jitters While Moving
+
+Lower the follow speed or adjust the interpolation logic.
+
+Jitter usually means the target position is changing too sharply.
+
+### Mascot Does Not React To Health
+
+Check that the health changed dispatcher is bound correctly.
+
+Also check that the health state or mood enum is being updated.
+
+### Mascot Looks At The Wrong Target
+
+Check that the stored look-at target is valid and cleared when no longer needed.
+
+### Mascot Logic Breaks When Other NUGS Are Missing
+
+Keep mascot reactions optional.
+
+The mascot should still follow even if health, collectible, or ability systems are not connected yet.
 
 ## Extension Notes
 
