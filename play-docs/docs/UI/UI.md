@@ -1,13 +1,14 @@
 ---
-title: UI
+title: UI NUG
 slug: /UI/UI
+description: Documentation for the PLA4Y UI NUG, a modular Unreal Engine UI system for HUD widgets, interaction prompts, collectible displays, health displays, and gameplay feedback.
 ---
 
-# UI System
+# UI NUG
 
 ## Overview
 
-The UI system displays gameplay information from the toolkit components.
+The UI NUG displays gameplay information from the toolkit components.
 
 Use it for collectible counts, health display, door requirements, power-up state, interaction prompts, and demo-level feedback.
 
@@ -27,6 +28,17 @@ Use it for collectible counts, health display, door requirements, power-up state
 - Supports world-space prompt widgets
 - Gives designers visible feedback during testing
 - Keeps UI separate from gameplay logic
+
+## Quick Setup
+
+Use this section to test one UI display.
+
+1. Create or open the required widget.
+2. Add the widget to the player HUD or viewport.
+3. Bind the widget to the relevant component.
+4. Trigger the gameplay system.
+5. Check that the widget updates.
+6. Test with print strings before debugging the widget layout.
 
 ## Features
 
@@ -180,6 +192,44 @@ Paste exported Blueprint node code here.
 ```text title="World-Space Prompt Positioning Nodes"
 Paste exported Blueprint node code here.
 ```
+
+## Common Issues
+
+### Widget Does Not Appear
+
+Check that the widget is being created and added to viewport.
+
+Also check that the owning player is valid.
+
+### Widget Appears But Does Not Update
+
+Check that the gameplay value changes first.
+
+Then check that the widget is bound to the correct component or dispatcher.
+
+### Prompt Is The Wrong Size
+
+Wrap the prompt contents in a ScaleBox or SizeBox.
+
+Set a clear desired size.
+
+### Prompt Appears In The Wrong Place
+
+Check whether the UI is screen-space or world-space.
+
+If using world location, make sure the location comes from the interactable object, not the player.
+
+### UI Updates Every Tick And Causes Issues
+
+Use dispatchers or event-based updates where possible.
+
+Only use tick for UI when it is actually needed.
+
+### Widget Looks Different In Another Resolution
+
+Use anchors, ScaleBox, SizeBox, and responsive layout containers.
+
+Test the widget at more than one viewport size before assuming the logic is broken.
 
 ## Extension Notes
 
