@@ -70,17 +70,24 @@ const config: Config = {
     },
     footer: {
       style: 'dark',
+      logo: {
+        alt: 'PLA4Y Logo',
+        src: 'img/favicon.ico',
+        href: '/',
+        width: 42,
+        height: 42,
+      },
       links: [
         {
-          title: 'PLA4Y',
+          title: 'Start Here',
           items: [
             {
-              label: 'Selector',
-              to: '/nugs',
+              label: 'Overview',
+              to: '/docs/overview',
             },
             {
-              label: 'Docs',
-              to: '/docs/overview',
+              label: 'NUG Selector',
+              to: '/nugs',
             },
             {
               label: 'Support',
@@ -88,8 +95,55 @@ const config: Config = {
             },
           ],
         },
+        {
+          title: 'Core NUGS',
+          items: [
+            {
+              label: 'Collectibles',
+              to: '/docs/NUGS%20-%20Systems/Collectible',
+            },
+            {
+              label: 'Door And Unlock',
+              to: '/docs/NUGS%20-%20Systems/Doors',
+            },
+            {
+              label: 'Health',
+              to: '/docs/NUGS%20-%20Systems/Health',
+            },
+          ],
+        },
+        {
+          title: 'Extra NUGS',
+          items: [
+            {
+              label: 'Mascot',
+              to: '/docs/NUGS%20-%20Systems/Mascot',
+            },
+            {
+              label: 'Ability And Power-Up',
+              to: '/docs/NUGS%20-%20Systems/Ability',
+            },
+            {
+              label: 'UI',
+              to: '/docs/UI/UI',
+            },
+          ],
+        },
+        {
+          title: 'Project',
+          items: [
+            {
+              label: 'GitHub Repository',
+              href: 'https://github.com/bbwdmu/PLA4Y',
+            },
+            {
+              label: 'GitHub Pages Site',
+              href: 'https://bbwdmu.github.io/PLA4Y/',
+            },
+          ],
+        },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} PLA4Y`,
+      copyright: `PLA4Y NUGS, Platformer Logic Assembled 4 You. Built with Docusaurus. Copyright © ${new Date().getFullYear()} PLA4Y.`,
     },
     prism: {
       theme: prismThemes.github,
