@@ -1,12 +1,13 @@
 ---
-title: Door
+title: Door And Unlock NUG
+description: Documentation for the PLA4Y Door And Unlock NUG, a modular Unreal Engine system for doors, gates, collectible checks, ability checks, and progression requirements.
 ---
 
-# Door And Unlock System
+# Door And Unlock NUG
 
 ## Overview
 
-The door system controls player progression using requirements from other systems.
+The Door And Unlock NUG controls player progression using requirements from other systems.
 
 Use it for locked doors, gates, barriers, collectible checks, ability checks, power-up checks, and demo-level progression examples.
 
@@ -37,6 +38,21 @@ This makes the system more modular. A door can use these components, but so can 
 - Supports action-based unlocks from power-ups
 - Keeps unlock logic separate from the actor that opens, breaks, or reveals content
 - Gives designers a clean place to configure progression rules
+
+## Quick Setup
+
+Use this section to test one locked door.
+
+1. Add `AC_DoorLock` to `BP_BaseDoor`.
+2. Add a collectible requirement.
+3. Assign the required collectible data asset or tag.
+4. Set the required amount.
+5. Add `AC_CollectibleWallet` to the player.
+6. Add enough collectibles to the level.
+7. Press Play.
+8. Try the door before collecting enough items.
+9. Collect the required amount.
+10. Try the door again.
 
 ## Features
 
@@ -253,6 +269,42 @@ Paste exported Blueprint node code here.
 ```text title="Locked UI Feedback Nodes"
 Paste exported Blueprint node code here.
 ```
+
+## Common Issues
+
+### Door Opens Without Requirements
+
+Check that the requirement array is not empty.
+
+Also check that the door calls the requirement check before running its open, break, or reveal logic.
+
+### Door Never Opens
+
+Check that the player has the required collectible amount.
+
+Also check that the door and wallet are using the same collectible data asset or gameplay tag.
+
+### Collectibles Are Removed When They Should Not Be
+
+Check the consume-on-unlock setting.
+
+Disable it if the actor should only check the amount and not spend the collectible.
+
+### Door Does Not React To A Power-Up
+
+Check that the ability or power-up state is active before the door checks requirements.
+
+Also check that the required ability type matches the ability activated by the pickup.
+
+### Locked Feedback Does Not Appear
+
+Check that the failed requirement path is connected to the UI or feedback logic.
+
+### Unlock Logic Is Too Door-Specific
+
+Keep the unlock check inside the component and the result behaviour inside the actor.
+
+The component should answer whether the player can unlock. The actor decides what happens next.
 
 ## Refactor Plan
 
