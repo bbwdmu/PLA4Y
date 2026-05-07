@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://bbwdmu.github.io/PLA4Y/sitemap.xml
