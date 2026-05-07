@@ -7,7 +7,7 @@ import type * as Preset from '@docusaurus/preset-classic';
 const config: Config = {
   title: 'PLA4Y',
   tagline: 'Modular platformer toolkit for Unreal Engine 5.7',
-  favicon: 'img/favicon.ico',
+  favicon: 'img/PLA4YLogoTransparent.svg',
 
   url: 'https://bbwdmu.github.io',
 
@@ -83,7 +83,7 @@ const config: Config = {
       title: 'PLA4Y',
       logo: {
         alt: 'PLA4Y Logo',
-        src: 'img/favicon.ico',
+        src: 'img/PLA4YLogoTransparent.svg',
       },
       items: [
         {
