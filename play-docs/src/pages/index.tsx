@@ -73,7 +73,7 @@ function HomepageHeader() {
       <div className={styles.heroGlow} aria-hidden="true" />
       <div className="container">
         <img
-          src="img/PLA4Y.png"
+          src="img/PLA4YLogoTransparent.svg"
           alt="PLA4Y logo showing a controller breaking into modular blue blocks"
           className={styles.heroLogo}
         />
