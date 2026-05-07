@@ -10,6 +10,14 @@ import styles from './index.module.css';
 
 const nugs = [
   {
+    title: 'Interaction',
+    shortName: 'Interaction NUG',
+    emoji: '🧩',
+    status: 'Core NUG',
+    description: 'Detect interactable actors, show player prompts, and trigger interface-based gameplay logic.',
+    to: '/docs/NUGS%20-%20Systems/Interaction',
+  },
+  {
     title: 'Collectibles',
     shortName: 'Collectible NUG',
     emoji: '💎',
@@ -85,7 +93,7 @@ function HomepageHeader() {
         </p>
 
         <p className={styles.heroIntro}>
-          PLA4Y is built around <strong>NUGS</strong>, short for <strong><span className={styles.acronymLetter}>N</span>eat <span className={styles.acronymLetter}>U</span>sable <span className={styles.acronymLetter}>G</span>ame <span className={styles.acronymLetter}>S</span>ystems</strong>. Each NUG is a small focused gameplay system, such as collectibles, health, doors, UI, power-ups, or mascot logic. Use one, combine several, or expand them into a full platformer toolkit.
+          PLA4Y is built around <strong>NUGS</strong>, short for <strong><span className={styles.acronymLetter}>N</span>eat <span className={styles.acronymLetter}>U</span>sable <span className={styles.acronymLetter}>G</span>ame <span className={styles.acronymLetter}>S</span>ystems</strong>. Each NUG is a small focused gameplay system, such as interaction, collectibles, health, doors, UI, power-ups, or mascot logic. Use one, combine several, or expand them into a full platformer toolkit.
         </p>
 
         <div className={styles.buttons}>
@@ -143,7 +151,7 @@ export default function Home(): ReactNode {
   return (
     <Layout
       title={siteConfig.title}
-      description="PLA4Y NUGS documentation for modular Unreal Engine platformer systems, including collectibles, doors, health, abilities, UI, and mascot companion systems.">
+      description="PLA4Y NUGS documentation for modular Unreal Engine platformer systems, including interaction, collectibles, doors, health, abilities, UI, and mascot companion systems.">
       <HomepageHeader />
       <main>
         <HomepageFeatures />
