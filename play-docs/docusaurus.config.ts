@@ -18,6 +18,13 @@ const config: Config = {
 
   onBrokenLinks: 'throw',
 
+  scripts: [
+    {
+      src: 'https://joined-forces.github.io/klee/klee.min.js',
+      async: true,
+    },
+  ],
+
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
