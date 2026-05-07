@@ -20,7 +20,7 @@ const config: Config = {
 
   scripts: [
     {
-      src: 'https://joined-forces.github.io/klee/klee.min.js',
+      src: 'https://joined-forces.github.io/klee/js/klee.min.js',
       async: true,
     },
   ],
