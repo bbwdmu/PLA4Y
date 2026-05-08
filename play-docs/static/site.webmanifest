@@ -1,0 +1,24 @@
+{
+  "name": "PLA4Y Documentation",
+  "short_name": "PLA4Y",
+  "description": "Reusable Unreal Engine 5.7 platformer systems for interaction, collectibles, doors, health, abilities, UI, and mascot companions.",
+  "start_url": "/PLA4Y/",
+  "scope": "/PLA4Y/",
+  "display": "standalone",
+  "background_color": "#081522",
+  "theme_color": "#0d6bff",
+  "icons": [
+    {
+      "src": "/PLA4Y/img/apple-touch-icon.png?v=2",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/PLA4Y/img/apple-touch-icon.png?v=2",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}
