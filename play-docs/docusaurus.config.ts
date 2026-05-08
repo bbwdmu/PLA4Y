@@ -93,7 +93,7 @@ const config: Config = {
           label: 'Docs',
         },
         {
-          to: '/nugs',
+          to: '/#nugs-selector',
           position: 'left',
           label: 'NUGS',
         },
@@ -116,7 +116,7 @@ const config: Config = {
             },
             {
               label: 'NUGS',
-              to: '/nugs',
+              to: '/#nugs-selector',
             },
             {
               label: 'Support',
