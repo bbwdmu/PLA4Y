@@ -6,10 +6,10 @@ import type * as Preset from '@docusaurus/preset-classic';
 
 const siteUrl = 'https://bbwdmu.github.io';
 const baseUrl = '/PLA4Y/';
-const siteTitle = 'PLA4Y NUGS Documentation';
+const siteTitle = 'PLA4Y NUGS: Modular Unreal Engine Platformer Toolkit';
 const siteDescription =
-  'PLA4Y NUGS documentation for modular Unreal Engine 5.7 gameplay systems, including interaction, collectibles, doors, health, abilities, UI, and mascot companion systems.';
-const socialCardUrl = `${siteUrl}${baseUrl}img/social-card.svg`;
+  'Reusable Unreal Engine 5.7 platformer systems for interaction, collectibles, doors, health, abilities, UI, and mascot companions.';
+const socialCardUrl = `${siteUrl}${baseUrl}img/social-card.png`;
 
 const config: Config = {
   title: 'PLA4Y',
@@ -57,7 +57,7 @@ const config: Config = {
   ],
 
   themeConfig: {
-    image: 'img/social-card.svg',
+    image: 'img/social-card.png',
     colorMode: {
       defaultMode: 'dark',
       disableSwitch: true,
@@ -91,7 +91,7 @@ const config: Config = {
       },
       {
         property: 'og:site_name',
-        content: siteTitle,
+        content: 'PLA4Y Documentation',
       },
       {
         property: 'og:title',
@@ -115,7 +115,7 @@ const config: Config = {
       },
       {
         property: 'og:image:type',
-        content: 'image/svg+xml',
+        content: 'image/png',
       },
       {
         property: 'og:image:width',
@@ -123,7 +123,7 @@ const config: Config = {
       },
       {
         property: 'og:image:height',
-        content: '675',
+        content: '630',
       },
       {
         property: 'og:image:alt',
