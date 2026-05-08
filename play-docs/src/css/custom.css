@@ -31,6 +31,23 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
+.navbar__logo {
+  height: 2.35rem;
+  width: 2.35rem;
+  margin-right: 0.65rem;
+}
+
+.navbar__logo img {
+  height: 2.35rem;
+  width: 2.35rem;
+  object-fit: contain;
+}
+
+.navbar__title {
+  font-size: 1.2rem;
+  font-weight: 950;
+}
+
 .footer {
   padding: 1.4rem 0;
   border-top: 1px solid rgba(143, 211, 255, 0.12);
@@ -88,6 +105,12 @@
 }
 
 @media screen and (max-width: 640px) {
+  .navbar__logo,
+  .navbar__logo img {
+    height: 2.1rem;
+    width: 2.1rem;
+  }
+
   .footer .container {
     justify-content: center;
     text-align: center;
