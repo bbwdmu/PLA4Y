@@ -60,8 +60,8 @@
 }
 
 .heroLogo {
-  width: 250px;
-  max-width: 58vw;
+  width: 340px;
+  max-width: 72vw;
   margin-bottom: 1rem;
   filter: drop-shadow(0 24px 34px rgba(0, 153, 255, 0.25));
 }
@@ -283,7 +283,8 @@
   }
 
   .heroLogo {
-    width: 210px;
+    width: 270px;
+    max-width: 80vw;
   }
 
   .buttons {
