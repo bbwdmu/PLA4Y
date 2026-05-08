@@ -16,6 +16,17 @@ const config: Config = {
   tagline: 'Modular platformer toolkit for Unreal Engine 5.7',
   favicon: 'img/favicon.ico',
 
+  headTags: [
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'apple-touch-icon',
+        sizes: '180x180',
+        href: '/PLA4Y/img/apple-touch-icon.png',
+      },
+    },
+  ],
+
   url: siteUrl,
 
   baseUrl,
@@ -84,6 +95,18 @@ const config: Config = {
       {
         name: 'theme-color',
         content: '#0d6bff',
+      },
+      {
+        name: 'apple-mobile-web-app-capable',
+        content: 'yes',
+      },
+      {
+        name: 'apple-mobile-web-app-status-bar-style',
+        content: 'black-translucent',
+      },
+      {
+        name: 'apple-mobile-web-app-title',
+        content: 'PLA4Y',
       },
       {
         property: 'og:type',
@@ -210,4 +233,3 @@ const config: Config = {
 };
 
 export default config;
-
