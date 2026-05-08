@@ -10,6 +10,7 @@ const siteTitle = 'PLA4Y NUGS: Modular Unreal Engine Platformer Toolkit';
 const siteDescription =
   'Reusable Unreal Engine 5.7 platformer systems for interaction, collectibles, doors, health, abilities, UI, and mascot companions.';
 const socialCardUrl = `${siteUrl}${baseUrl}img/social-card.png`;
+const appIconUrl = `${baseUrl}img/apple-touch-icon.png?v=2`;
 
 const config: Config = {
   title: 'PLA4Y',
@@ -22,7 +23,31 @@ const config: Config = {
       attributes: {
         rel: 'apple-touch-icon',
         sizes: '180x180',
-        href: '/PLA4Y/img/apple-touch-icon.png',
+        href: appIconUrl,
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'apple-touch-icon-precomposed',
+        sizes: '180x180',
+        href: appIconUrl,
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'icon',
+        type: 'image/png',
+        sizes: '180x180',
+        href: appIconUrl,
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'manifest',
+        href: `${baseUrl}site.webmanifest`,
       },
     },
   ],
