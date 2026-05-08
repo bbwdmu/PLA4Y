@@ -78,8 +78,6 @@ function HomepageHeader() {
           className={styles.heroLogo}
         />
 
-        <p className={styles.kicker}>PLA4Y Documentation</p>
-
         <Heading as="h1" className={styles.heroTitle}>
           PLA4Y
         </Heading>
