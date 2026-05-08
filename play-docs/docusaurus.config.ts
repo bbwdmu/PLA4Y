@@ -10,7 +10,7 @@ const siteTitle = 'PLA4Y NUGS: Modular Unreal Engine Platformer Toolkit';
 const siteDescription =
   'Reusable Unreal Engine 5.7 platformer systems for interaction, collectibles, doors, health, abilities, UI, and mascot companions.';
 const socialCardUrl = `${siteUrl}${baseUrl}img/social-card.png`;
-const appIconUrl = `${baseUrl}img/apple-touch-icon.png?v=2`;
+const appIconUrl = `${baseUrl}apple-touch-icon.png?v=3`;
 
 const config: Config = {
   title: 'PLA4Y',
@@ -24,6 +24,38 @@ const config: Config = {
         rel: 'apple-touch-icon',
         sizes: '180x180',
         href: appIconUrl,
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'apple-touch-icon',
+        sizes: '152x152',
+        href: `${baseUrl}apple-touch-icon-ipad-retina-152x152.png?v=3`,
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'apple-touch-icon',
+        sizes: '120x120',
+        href: `${baseUrl}apple-touch-icon-iphone-retina-120x120.png?v=3`,
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'apple-touch-icon',
+        sizes: '76x76',
+        href: `${baseUrl}apple-touch-icon-ipad-76x76.png?v=3`,
+      },
+    },
+    {
+      tagName: 'link',
+      attributes: {
+        rel: 'apple-touch-icon',
+        sizes: '60x60',
+        href: `${baseUrl}apple-touch-icon-iphone-60x60.png?v=3`,
       },
     },
     {
