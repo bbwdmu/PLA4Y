@@ -124,22 +124,6 @@ const config: Config = {
     ],
   ],
 
-  plugins: [
-    [
-      require.resolve('@easyops-cn/docusaurus-search-local'),
-      {
-        hashed: true,
-        language: ['en'],
-        indexDocs: true,
-        indexBlog: false,
-        indexPages: true,
-        docsRouteBasePath: '/docs',
-        searchResultLimits: 8,
-        searchResultContextMaxLength: 60,
-      },
-    ],
-  ],
-
   themeConfig: {
     image: 'img/social-card.png',
     colorMode: {
