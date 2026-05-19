@@ -1,0 +1,426 @@
+---
+title: Ability And Power-Up NUG
+description: Documentation for the PLA4Y Ability And Power-Up NUG, a modular Unreal Engine system for runtime power-up components, data asset driven setup, timers, unlocks, and reusable gameplay effects.
+---
+
+import BlueprintFlowPlaceholder from '@site/src/components/BlueprintFlowPlaceholder';
+
+# Ability And Power-Up NUG
+
+## Overview
+
+The Ability And Power-Up NUG manages temporary power-ups, permanent unlocks, and reusable gameplay effects.
+
+The current power-up pass uses a component-based lifecycle. The player only needs `AC_PowerupManager`. When a pickup grants a power-up, the manager reads a data asset, adds the correct power-up component at runtime, starts it through an interface, tracks it, and removes it when the effect ends.
+
+This keeps the system modular. The manager does not know how Big, Small, Flame, Magnet, Speed, or any future effect works. Each effect lives in its own component.
+
+## Core Components
+
+- `AC_PowerupManager`
+- `AC_PowerupBase`
+- `BPI_PowerupEffect`
+- `PDA_PowerupDefinition`
+- `Struct_PowerupGrantSettings`
+- `Struct_ActivePowerup`
+- `BP_PowerupPickup`
+
+## Current First Power-Up
+
+The first implemented power-up is Size Shift.
+
+Size Shift supports:
+
+- Big only
+- Small only
+- Big and Small later
+- Timed use
+- Until removed use
+- Runtime component creation
+- Resetting the player scale when the power-up ends
+
+Suggested class names:
+
+- `AC_Powerup_SizeShift`
+- `PDA_PowerupDefinition_SizeShift`
+- `DA_Powerup_Big`
+- `DA_Powerup_Small`
+
+## Design Goal
+
+The system is built around this rule:
+
+```text
+Manager handles lifecycle.
+Data asset describes the power-up.
+Effect component performs the power-up.
+Pickup grants the power-up.
+```
+
+The player starts with `AC_PowerupManager`. Power-up components are added only when needed.
+
+## Base Data Asset
+
+`PDA_PowerupDefinition` stores shared power-up data only.
+
+| Variable | Type | Purpose |
+| --- | --- | --- |
+| `PowerupID` | Name | Exact power-up ID, such as `BigMode` or `SmallMode` |
+| `PowerupGroup` | Name | Conflict group, such as `SizeShift` |
+| `PowerupName` | Text | Player-facing name |
+| `PowerupDescription` | Text | UI and documentation text |
+| `EffectComponentClass` | Class Reference of `AC_PowerupBase` | Component class added by the manager |
+| `DefaultDuration` | Float | Fallback duration when the pickup does not override it |
+| `bCanBeTimed` | Boolean | Whether timed activation is supported |
+| `DefaultGrantMode` | `E_PowerupGrantMode` | Default way this power-up is granted |
+| `DefaultComponentLifetime` | `E_PowerupComponentLifetime` | Whether the component is temporary or kept |
+| `Icon` | Texture2D | UI icon |
+| `PickupMesh` | Static Mesh | Mesh used by the pickup actor |
+| `bCanBeDisabled` | Boolean | Allows level rules to disable the power-up group |
+| `bCanBeUnlocked` | Boolean | Allows permanent unlock behaviour |
+
+Do not put effect-specific values in the base asset.
+
+For example, do not put `TargetScale`, `FlameDamage`, or `MagnetRadius` in the base data asset. Those belong in child data assets.
+
+## Size Shift Data Asset
+
+`PDA_PowerupDefinition_SizeShift` is a child of `PDA_PowerupDefinition`.
+
+| Variable | Type | Purpose |
+| --- | --- | --- |
+| `SizeShiftMode` | `E_SizeShiftMode` | Big only, Small only, or both |
+| `DefaultSizeTarget` | `E_SizeShiftTarget` | Which size is applied when the effect starts |
+| `BigScale` | Vector | Scale used for Big mode |
+| `SmallScale` | Vector | Scale used for Small mode |
+| `TransitionSpeed` | Float | Future value for smooth scale movement |
+| `bResetScaleOnEnd` | Boolean | Resets the player to original scale when stopped |
+
+Big and Small both use `PowerupGroup = SizeShift`, so they replace each other instead of stacking.
+
+## Grant Settings
+
+`Struct_PowerupGrantSettings` lives on pickups or grant actors.
+
+| Variable | Type | Purpose |
+| --- | --- | --- |
+| `PowerupDefinition` | `PDA_PowerupDefinition` Object Reference | The power-up to grant |
+| `GrantMode` | `E_PowerupGrantMode` | Timed, UntilRemoved, PermanentUnlock, LevelTemporary |
+| `ComponentLifetime` | `E_PowerupComponentLifetime` | ActiveOnly, KeepWhileUnlocked, KeepUntilLevelEnd |
+| `bOverrideDuration` | Boolean | Lets the pickup override the data asset duration |
+| `OverrideDuration` | Float | Duration used when override is enabled |
+| `bAutoActivate` | Boolean | Starts the power-up immediately after grant |
+| `bRemoveOnLevelEnd` | Boolean | Marks the power-up for level cleanup later |
+
+This lets designers use the same data asset in different ways.
+
+## Active Power-Up Runtime Data
+
+`Struct_ActivePowerup` lives inside `AC_PowerupManager`.
+
+| Variable | Type | Purpose |
+| --- | --- | --- |
+| `PowerupDefinition` | `PDA_PowerupDefinition` Object Reference | Data asset used by the active effect |
+| `PowerupID` | Name | Exact active power-up ID |
+| `PowerupGroup` | Name | Group key used in the active map |
+| `EffectComponent` | `AC_PowerupBase` Object Reference | Runtime component instance on the player |
+| `GrantMode` | `E_PowerupGrantMode` | How the effect was granted |
+| `ComponentLifetime` | `E_PowerupComponentLifetime` | How the component should be cleaned up |
+| `Duration` | Float | Final duration used by the timer |
+| `StartTime` | Float | Game time when the power-up started |
+| `bManagerSpawnedComponent` | Boolean | True if the manager added the component at runtime |
+| `bRemoveOnLevelEnd` | Boolean | Used later for level cleanup |
+
+`EffectComponentClass` is the recipe.
+
+`EffectComponent` is the actual component instance created on the player.
+
+## Manager Variables
+
+| Variable | Type | Purpose |
+| --- | --- | --- |
+| `ActivePowerups` | Map, Name to `Struct_ActivePowerup` | Tracks active power-up groups |
+| `UnlockedPowerups` | Map, Name to `PDA_PowerupDefinition` | Tracks owned power-ups |
+| `DisabledPowerupGroups` | Array of Name | Blocks power-up groups by level or state |
+
+`ActivePowerups` uses `PowerupGroup` as the key.
+
+This allows multiple groups to run together, while stopping conflicts inside the same group.
+
+## Manager Functions
+
+### `ApplyPowerupGrant`
+
+Entry point from pickups.
+
+Flow:
+
+1. Validate `PowerupDefinition`.
+2. Get `PowerupGroup`.
+3. Check `DisabledPowerupGroups`.
+4. Switch on `GrantMode`.
+5. Timed and UntilRemoved call `ActivatePowerup`.
+6. PermanentUnlock calls `UnlockPowerup`, then activates if `bAutoActivate` is true.
+7. LevelTemporary unlocks and activates for this level.
+
+### `ActivatePowerup`
+
+Starts a power-up effect.
+
+Flow:
+
+1. Validate the data asset.
+2. Get `PowerupID` and `PowerupGroup`.
+3. If `ActivePowerups` already contains the group, call `EndPowerupByGroup`.
+4. Call `FindOrCreatePowerupComponent`.
+5. Call `InitialisePowerup` through `BPI_PowerupEffect`.
+6. Call `StartPowerup` through `BPI_PowerupEffect`.
+7. Work out the final duration.
+8. Add the active power-up to `ActivePowerups`.
+9. If the grant mode is Timed, start the lifetime timer on the component.
+10. Broadcast `OnPowerupStarted`.
+
+The active map should be updated before the lifetime timer can expire.
+
+### `FindOrCreatePowerupComponent`
+
+Adds or reuses the correct runtime component.
+
+Flow:
+
+1. Get `EffectComponentClass` from the data asset.
+2. Check the owner for an existing component of that class.
+3. If one exists, reuse it.
+4. If none exists, use `Add Component by Class`.
+5. Cast the result to `AC_PowerupBase`.
+6. Return the component instance.
+
+### `EndPowerupByGroup`
+
+Stops one active power-up group.
+
+Flow:
+
+1. Check `ActivePowerups` contains the group.
+2. Get the stored `Struct_ActivePowerup`.
+3. Get `EffectComponent` from the struct.
+4. Clear the component lifetime timer.
+5. Call `StopPowerup` through `BPI_PowerupEffect` on the component.
+6. If `bManagerSpawnedComponent` is true and lifetime is ActiveOnly, destroy the component.
+7. Remove the group from `ActivePowerups`.
+8. Broadcast `OnPowerupEnded`.
+
+Call the interface on the stored component instance, not on the manager.
+
+## Interface
+
+`BPI_PowerupEffect` keeps the manager generic.
+
+Suggested functions:
+
+- `InitialisePowerup`
+- `StartPowerup`
+- `StopPowerup`
+- `DisablePowerup`
+- `EnablePowerup`
+
+## Power-Up Base Component
+
+`AC_PowerupBase` is the parent for all effect components.
+
+Suggested variables:
+
+- `PowerupDefinition`
+- `OwningManager`
+- `PowerupID`
+- `PowerupGroup`
+- `bPowerupActive`
+- `bPowerupDisabled`
+- `LifetimeTimerHandle`
+
+Suggested functions:
+
+- `StartLifetimeTimer`
+- `HandleLifetimeExpired`
+- `ClearLifetimeTimer`
+
+## Size Shift Component
+
+`AC_Powerup_SizeShift` is a child of `AC_PowerupBase`.
+
+Suggested variables:
+
+- `OriginalScale`
+- `CurrentSizeTarget`
+- `SizeShiftData`
+- `bHasSavedOriginalScale`
+
+Suggested functions:
+
+- `ApplyBig`
+- `ApplySmall`
+- `ReturnToNormal`
+
+## Runtime Flow
+
+1. Player overlaps `BP_PowerupPickup`.
+2. Pickup sends `Struct_PowerupGrantSettings` to `AC_PowerupManager`.
+3. Manager validates the data asset and group.
+4. Manager checks if another power-up in that group is already active.
+5. If needed, manager ends the old group.
+6. Manager reads `EffectComponentClass` from the data asset.
+7. Manager adds or reuses the effect component.
+8. Manager calls `InitialisePowerup` through `BPI_PowerupEffect`.
+9. Manager calls `StartPowerup` through `BPI_PowerupEffect`.
+10. Manager stores runtime data in `ActivePowerups`.
+11. If timed, the component lifetime timer starts.
+12. When the timer expires, the component asks the manager to end its group.
+13. Manager calls `StopPowerup`, destroys the component if needed, and removes the group from `ActivePowerups`.
+
+## Quick Setup
+
+Use this section to test Big Mode.
+
+1. Add `AC_PowerupManager` to the player character.
+2. Do not add `AC_Powerup_SizeShift` manually.
+3. Create `PDA_PowerupDefinition_SizeShift` as a child data asset class.
+4. Create `DA_Powerup_Big` from that child class.
+5. Set `EffectComponentClass` to `AC_Powerup_SizeShift`.
+6. Set `PowerupGroup` to `SizeShift`.
+7. Create or place `BP_PowerupPickup`.
+8. Set the pickup `GrantSettings.PowerupDefinition` to `DA_Powerup_Big`.
+9. Set `GrantMode` to Timed.
+10. Set `ComponentLifetime` to ActiveOnly.
+11. Enable `bOverrideDuration` and set `OverrideDuration` to 10.
+12. Press Play.
+13. Collect the pickup.
+14. Check the player becomes big.
+15. Wait for the timer.
+16. Check the player returns to normal and the runtime component is removed.
+
+## UI Support
+
+Use manager helper functions for UI.
+
+Suggested functions:
+
+- `GetActivePowerups`
+- `IsPowerupGroupActive`
+- `GetActivePowerupByGroup`
+- `GetPowerupRemainingTimeByGroup`
+
+No extra UI data struct is needed for now.
+
+## Future Manual Activation Plan
+
+Manual activation is not part of the current build, but the system should support it later.
+
+Future approach:
+
+- Add `AddToInventory` to `E_PowerupGrantMode`.
+- Add `HeldPowerups` to `AC_PowerupManager`.
+- Store picked up but unused power-ups there.
+- Add `UseHeldPowerupByID`.
+- Add `ActivateUnlockedPowerup` for permanent unlocks.
+- Route both functions into the existing `ActivatePowerup` flow.
+
+## Blueprint Flow Placeholders
+
+These are temporary Klee render placeholders using the same working example as the Interaction NUG.
+
+Replace each placeholder with the real exported Blueprint nodes when the final logic is ready.
+
+### AC_PowerupManager, ApplyPowerupGrant
+
+<BlueprintFlowPlaceholder title="AC_PowerupManager, ApplyPowerupGrant Placeholder" />
+
+### AC_PowerupManager, ActivatePowerup
+
+<BlueprintFlowPlaceholder title="AC_PowerupManager, ActivatePowerup Placeholder" />
+
+### AC_PowerupManager, FindOrCreatePowerupComponent
+
+<BlueprintFlowPlaceholder title="AC_PowerupManager, FindOrCreatePowerupComponent Placeholder" />
+
+### AC_PowerupManager, EndPowerupByGroup
+
+<BlueprintFlowPlaceholder title="AC_PowerupManager, EndPowerupByGroup Placeholder" />
+
+### AC_PowerupBase, Lifetime Timer
+
+<BlueprintFlowPlaceholder title="AC_PowerupBase, Lifetime Timer Placeholder" />
+
+### AC_Powerup_SizeShift, StartPowerup
+
+<BlueprintFlowPlaceholder title="AC_Powerup_SizeShift, StartPowerup Placeholder" />
+
+### AC_Powerup_SizeShift, StopPowerup
+
+<BlueprintFlowPlaceholder title="AC_Powerup_SizeShift, StopPowerup Placeholder" />
+
+### BP_PowerupPickup, Overlap Logic
+
+<BlueprintFlowPlaceholder title="BP_PowerupPickup, Overlap Logic Placeholder" />
+
+## Common Issues
+
+### Power-Up Does Not Activate
+
+Check that the pickup overlap is firing.
+
+Then check the overlapping actor has `AC_PowerupManager`.
+
+### Effect Component Does Not Spawn
+
+Check `EffectComponentClass` on the data asset.
+
+It must be a class reference to a child of `AC_PowerupBase`.
+
+### Interface Call Targets Self
+
+Call interface messages on the stored `EffectComponent`, not on `AC_PowerupManager`.
+
+### Timer Does Not End The Power-Up
+
+Check this order inside `ActivatePowerup`:
+
+1. Create or find the component.
+2. Start the effect.
+3. Add the active struct to `ActivePowerups`.
+4. Start the lifetime timer.
+
+### Big And Small Stack Incorrectly
+
+Check both data assets use:
+
+```text
+PowerupGroup = SizeShift
+```
+
+## Extension Notes
+
+- Add VFX and SFX later after the core logic is stable
+- Add manual activation later through held power-ups
+- Add save support for permanent unlocks
+- Add level cleanup for `LevelTemporary` grants
+- Add disabled group support for level rules, such as Flame being blocked underwater
+- Add more child data assets for Flame, Magnet, Speed, and Invincibility
+- Keep the manager generic and avoid power-up-specific casts inside it
+
+## Testing Checklist
+
+- Player has `AC_PowerupManager`
+- Player does not manually include `AC_Powerup_SizeShift`
+- Pickup calls `ApplyPowerupGrant`
+- Data asset has a valid `EffectComponentClass`
+- Manager adds the effect component at runtime
+- Interface start call fires on the effect component
+- Big Mode changes player scale
+- Active power-up is stored using `PowerupGroup`
+- Timer expires correctly
+- `EndPowerupByGroup` finds the active group
+- Interface stop call fires on the effect component
+- Player scale returns to normal
+- Manager destroys ActiveOnly components it created
+- Big and Small replace each other through the `SizeShift` group
+- UI can read active power-ups through manager helper functions
